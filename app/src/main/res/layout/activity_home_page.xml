@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="vertical"
+        android:translationY="650dp"
+        android:gravity="center"
+        android:background="#D84040"
+        android:padding="16dp"/>
+    <ImageButton
+        android:id="@+id/settingsbuttonHP"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:background="@null"
+        android:src="@drawable/menu2"
+        android:scaleType="fitCenter"
+        android:elevation="1dp"
+        android:translationY="-35dp"
+        android:translationX="150dp"
+        />
+    <ImageButton
+    android:id="@+id/usersbuttonHP"
+    android:layout_width="25dp"
+    android:layout_height="25dp"
+    android:layout_gravity="center_horizontal"
+    android:textColor="@color/white"
+    android:background="@null"
+    android:src="@drawable/user2"
+    android:scaleType="fitCenter"
+    android:elevation="1dp"
+    android:translationY="-59dp"
+    android:translationX="-150dp"
+    />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:translationY="-120dp"
+        android:gravity="center"
+        android:background="#D84040"
+        android:padding="16dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/righteous_regular"
+        android:textSize="30sp"
+        android:text="RestoTrack"
+        android:elevation="6dp"
+        android:textColor="@color/black"
+        android:translationY="-190dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textSize="23sp"
+        android:text="Want To Book A Reservation?"
+        android:textColor="@color/black"
+        android:elevation="10dp"
+        android:translationY="-80dp"/>
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:translationY="20dp"
+
+        />
+
+    <Button
+        android:id="@+id/btnNo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:translationX="-50dp"
+        android:layout_marginTop="-400dp"
+        android:elevation="50dp"
+        android:background="@drawable/button_cancel"/>
+    <Button
+        android:id="@+id/Yes"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:translationX="60dp"
+        android:translationY="-48dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:background="@drawable/button_logout"/>
+
+
+</LinearLayout>
