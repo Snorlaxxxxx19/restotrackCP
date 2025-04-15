@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Restotrack"
         tools:targetApi="31">
         <activity
+            android:name=".numberpicker"
+            android:exported="false" />
+        <activity
+            android:name=".TimeActivityActivity"
+            android:exported="true" />
+        <activity
             android:name=".Setting"
             android:exported="true" />
         <activity
