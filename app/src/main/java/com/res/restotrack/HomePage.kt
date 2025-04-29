@@ -9,7 +9,6 @@ import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import com.res.restotrack.Landing.Companion.REQUEST_CODE_RESERVE
 
 
 class HomePage : Activity() {
@@ -33,7 +32,7 @@ class HomePage : Activity() {
 
 
         settingsButton.setOnClickListener{
-            val intent = Intent(this, Setting::class.java)
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
         usersButton.setOnClickListener{

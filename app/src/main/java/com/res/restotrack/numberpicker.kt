@@ -1,10 +1,12 @@
 package com.res.restotrack
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 
@@ -14,6 +16,12 @@ class numberpicker : Activity() {
         setContentView(R.layout.activity_numberpicker)
 
         val spinner: Spinner = findViewById(R.id.peopleSpinner)
+        val prcdButton = findViewById<Button>(R.id.btnProceed)
+
+        prcdButton.setOnClickListener{
+            val intent = Intent(this, TableSelection::class.java)
+            startActivity(intent)
+        }
 
         val adapter = ArrayAdapter.createFromResource(
             this,
@@ -28,6 +36,9 @@ class numberpicker : Activity() {
                 val selected = parent.getItemAtPosition(position).toString()
                 Toast.makeText(this@numberpicker, "Selected: $selected people", Toast.LENGTH_SHORT).show()
             }
+
+
+
 
             override fun onNothingSelected(parent: AdapterView<*>) {
 

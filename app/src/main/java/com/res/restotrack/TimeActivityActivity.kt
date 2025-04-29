@@ -1,20 +1,23 @@
 package com.res.restotrack
 
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.res.restotrack.adapter.TimeSlotAdapter
-import com.res.restotrack.application.TimeSlotApp
 import com.res.restotrack.data.TimeSlot
+import com.res.restotrack.helper.TimeSlotAdapter
 import com.res.restotrack.viewmodel.TimeSlotViewModel
 
-class TimeActivityActivity : Activity() {
+class TimeActivityActivity : AppCompatActivity(), LifecycleOwner {
+
     private lateinit var viewModel: TimeSlotViewModel
     private lateinit var adapter: TimeSlotAdapter
     private lateinit var recyclerView: RecyclerView
@@ -24,46 +27,58 @@ class TimeActivityActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_activity)
 
-        viewModel = TimeSlotViewModel()
         recyclerView = findViewById(R.id.recyclerView)
         addButton = findViewById(R.id.addButton)
+
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+            .create(TimeSlotViewModel::class.java)
 
         setupRecyclerView()
         setupAddButton()
     }
 
-    private fun showSelectionConfirmation(position: Int) {
-        val timeSlot = viewModel.getTimeSlots()[position]
+    private fun setupRecyclerView() {
+        adapter = TimeSlotAdapter(
+            emptyList(),
+            onItemClick = { timeSlot ->
+                showReservationConfirmation(timeSlot)
+            },
+            onLongClick = { position ->
+                showDeleteConfirmation(position)
+            }
+        )
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+
+        viewModel.timeSlots.observe(this) { timeSlots ->
+            adapter.updateTimeSlots(timeSlots)
+        }
+    }
+
+    private fun showReservationConfirmation(timeSlot: TimeSlot) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_time_slot_confirmation, null)
 
         dialogView.findViewById<TextView>(R.id.timeSlot).text =
             "${timeSlot.startTime} - ${timeSlot.endTime}"
 
-        val dialog = AlertDialog.Builder(this)
+        val alertDialog = AlertDialog.Builder(this)
             .setView(dialogView)
+            .setCancelable(true)
             .create()
 
         dialogView.findViewById<Button>(R.id.positiveButton).setOnClickListener {
-            // Handle booking confirmation
-            Toast.makeText(this, "Time slot booked!", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
+
+            val intent = Intent(this, numberpicker::class.java)
+            startActivity(intent)
+            alertDialog.dismiss()
         }
 
         dialogView.findViewById<Button>(R.id.negativeButton).setOnClickListener {
-            dialog.dismiss()
+            alertDialog.dismiss()
         }
 
-        dialog.window?.setWindowAnimations(R.style.DialogAnimation)
-        dialog.show()
-    }
-
-    private fun setupRecyclerView() {
-        adapter = TimeSlotAdapter(viewModel.getTimeSlots()) { position ->
-            showDeleteConfirmation(position)
-        }
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        alertDialog.show()
     }
 
     private fun setupAddButton() {
@@ -73,17 +88,11 @@ class TimeActivityActivity : Activity() {
     }
 
     private fun addNewTimeSlot() {
-        val lastSlot = if (TimeSlotApp.timeSlots.isNotEmpty()) {
-            TimeSlotApp.timeSlots.last()
-        } else {
-            TimeSlot(0, "8:00 AM", "10:00 AM")
-        }
+        val lastSlot = viewModel.timeSlots.value?.lastOrNull() ?: TimeSlot(0, "8:00 AM", "10:00 AM")
 
-        // Parse the last end time
         val (timePart, ampm) = lastSlot.endTime.split(" ")
         val (hours, minutes) = timePart.split(":").map { it.toInt() }
 
-        // Calculate new start time (30 minutes after last end time)
         var newHours = hours
         var newMinutes = minutes + 30
         var newAMPM = ampm
@@ -100,7 +109,6 @@ class TimeActivityActivity : Activity() {
 
         val newStartTime = String.format("%d:%02d %s", newHours, newMinutes, newAMPM)
 
-        // Calculate end time (2 hours after start time)
         var endHours = newHours + 2
         var endMinutes = newMinutes
         var endAMPM = newAMPM
@@ -113,8 +121,7 @@ class TimeActivityActivity : Activity() {
         val newEndTime = String.format("%d:%02d %s", endHours, endMinutes, endAMPM)
 
         viewModel.addTimeSlot(newStartTime, newEndTime)
-        adapter.notifyItemInserted(TimeSlotApp.timeSlots.size - 1)
-        recyclerView.smoothScrollToPosition(TimeSlotApp.timeSlots.size - 1)
+        recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
     }
 
     private fun showDeleteConfirmation(position: Int) {
@@ -123,7 +130,7 @@ class TimeActivityActivity : Activity() {
             .setMessage("Are you sure you want to delete this time slot?")
             .setPositiveButton("Delete") { _, _ ->
                 viewModel.removeTimeSlot(position)
-                adapter.notifyItemRemoved(position)
+                adapter.removeItemAt(position) // Remove item from the adapter
                 Toast.makeText(this, "Time slot deleted", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel", null)

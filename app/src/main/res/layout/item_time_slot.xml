@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="?attr/selectableItemBackground">
+        android:background="#FFFFFF"> <!-- 🔵 Replace selectableItemBackground with white background -->
 
         <!-- Time Slot Indicator -->
         <View
@@ -46,14 +46,13 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-
         <ImageView
             android:id="@+id/deleteIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/delete"
             android:visibility="gone"
-            app:tint="#D84040" />
+             />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

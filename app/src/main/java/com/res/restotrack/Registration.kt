@@ -6,10 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class Registration : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,28 +20,59 @@ class Registration : Activity() {
         val submit = findViewById<Button>(R.id.singup_2)
 
         intent?.let {
-            it.getStringExtra("username").let { username -> Username.setText(username) }
-            it.getStringExtra("firstname").let { firstname -> Firstname.setText(firstname) }
-            it.getStringExtra("lastname").let { lastname -> Lastname.setText(lastname) }
-            it.getStringExtra("password").let { password -> Password.setText(password) }
-            it.getStringExtra("cpass").let { cpass -> Confirmpassword.setText(cpass) }
+            it.getStringExtra("username")?.let { username -> Username.setText(username) }
+            it.getStringExtra("firstname")?.let { firstname -> Firstname.setText(firstname) }
+            it.getStringExtra("lastname")?.let { lastname -> Lastname.setText(lastname) }
+            it.getStringExtra("password")?.let { password -> Password.setText(password) }
+            it.getStringExtra("cpass")?.let { cpass -> Confirmpassword.setText(cpass) }
         }
 
         submit.setOnClickListener {
-            if (Username.text.isNullOrEmpty() || Firstname.text.isNullOrEmpty()
-                || Lastname.text.isNullOrEmpty() || Password.text.isNullOrEmpty()
-                || Confirmpassword.text.isNullOrEmpty()) {
+            val usernameText = Username.text.toString().trim()
+            val firstNameText = Firstname.text.toString().trim()
+            val lastNameText = Lastname.text.toString().trim()
+            val passwordText = Password.text.toString()
+            val confirmPasswordText = Confirmpassword.text.toString()
+
+            if (usernameText.isEmpty() || firstNameText.isEmpty() || lastNameText.isEmpty() ||
+                passwordText.isEmpty() || confirmPasswordText.isEmpty()) {
                 Toast.makeText(this, "Please fill out all information", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            if (!usernameText.contains("@gmail.com")) {
+                Toast.makeText(this, "Username must be a valid Gmail address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (passwordText.length < 8) {
+                Toast.makeText(this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (passwordText != confirmPasswordText) {
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("username", usernameText)
+            editor.putString("password", passwordText)
+            editor.putString("firstName", firstNameText)
+            editor.putString("lastName", lastNameText)
+            editor.putString("email", usernameText) // Treating Gmail as email
+            editor.putString("bio", "No bio provided")
+            editor.apply()
+
 
             val intent = Intent(this, FillLogin::class.java).apply {
-                putExtra("username", Username.text.toString())
-                putExtra("firstname", Firstname.text.toString())
-                putExtra("lastname", Lastname.text.toString())
-                putExtra("password", Password.text.toString())
-                putExtra("cpass", Confirmpassword.text.toString())
+                putExtra("username", usernameText)
+                putExtra("firstname", firstNameText)
+                putExtra("lastname", lastNameText)
+                putExtra("password", passwordText)
+                putExtra("cpass", confirmPasswordText)
             }
             startActivity(intent)
         }

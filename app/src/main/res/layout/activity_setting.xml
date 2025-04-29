@@ -3,36 +3,134 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    tools:context=".SettingsActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D84040"
     android:orientation="vertical"
-    tools:context=".Setting">
+    android:padding="20dp"
+    android:background="#fff8f6">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:paddingBottom="20dp"
         android:text="Settings"
-        android:textSize="43dp" />
+        android:textColor="#794e42"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="2dp" />
 
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="341dp"
+        android:layout_height="47dp"
+        android:background="@drawable/rounded_button_2"
+        android:hint="Search for a setting"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:textColor="#222222"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="112dp" />
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:paddingBottom="10dp"
+        android:text="Customize your Account"
+        android:textColor="#794e42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="179dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Privacy and Security"
+        android:textColor="#794e42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="226dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Help and Support"
+        android:textColor="#794e42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="277dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="Notifications"
+        android:textColor="#794e42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <Switch
+        android:id="@+id/switch_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Notifications"
+        android:textColor="#794e42"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="374dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="Display"
+        android:textColor="#794e42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <CheckBox
+        android:id="@+id/checkbox_darkmode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Dark Mode"
+        android:textColor="#794e42"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="475dp" />
 
     <Button
-        android:id="@+id/setdev"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:text="Meet the Developers"
-        android:textStyle="bold" />
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#895c4f"
+        android:text="LOGOUT"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteY="623dp"/>
 
-
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="ABOUT THE DEVELOPERS"
+        android:textColor="#794e42"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="557dp" />
 
 </LinearLayout>

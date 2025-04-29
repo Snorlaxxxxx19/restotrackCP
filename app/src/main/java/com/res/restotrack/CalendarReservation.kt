@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.CalendarView
-import android.widget.TextView
 import android.widget.Button
+import android.widget.CalendarView
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import java.util.Calendar
 
@@ -54,11 +54,9 @@ class CalendarReservation : Activity() {
         // Handle Reserve Button Click
         reserveButton.setOnClickListener {
             if (isDateValid()) {
-                val resultIntent = Intent().apply {
-                    putExtra("RESERVED_DATE", reservedDate)
-                }
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()  // Close the CalendarReservation properly
+                val intent = Intent(this, TimeActivityActivity::class.java)
+                intent.putExtra("RESERVED_DATE", reservedDate) // (Optional) Pass selected date
+                startActivity(intent)
             } else {
                 Toast.makeText(this, "Cannot reserve a past date!", Toast.LENGTH_SHORT).show()
             }

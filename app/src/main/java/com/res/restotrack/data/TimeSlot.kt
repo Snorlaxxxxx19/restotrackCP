@@ -1,3 +1,5 @@
+
+
 package com.res.restotrack.data
 
 data class TimeSlot(

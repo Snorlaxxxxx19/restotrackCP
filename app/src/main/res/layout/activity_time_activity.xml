@@ -18,18 +18,16 @@
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
 
-
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#D84040"
-        android:text="Add New Time Slot"
-        android:textColor="@color/white"
-        app:cornerRadius="8dp"
-        app:iconGravity="textStart"
-        app:iconTint="@color/white" />
+        android:background="#D84040"
+    android:text="Add New Time Slot"
+    android:textColor="@color/white"
+    app:cornerRadius="8dp"
+    app:iconGravity="textStart"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

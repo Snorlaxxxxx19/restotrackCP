@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff8f6"
+    tools:context=".EditProfileActivity">
+
+    <!-- Beige Header -->
+    <View
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#d84040"
+        android:layout_alignParentTop="true"/>
+
+    <!-- Memory Locker Title (Centered in Header) -->
+    <TextView
+        android:id="@+id/headertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RestoTrack"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+
+    <ImageView
+        android:id="@+id/settingsIcon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/close"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Profile Picture Section -->
+    <LinearLayout
+        android:id="@+id/profileImageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/user"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="6dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!-- Change Profile Photo Text -->
+        <TextView
+            android:id="@+id/changeProfileText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Profile Photo"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <!-- Input Fields -->
+    <ScrollView
+        android:id="@+id/formScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileImageContainer"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/formLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/edit_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"/>
+
+            <EditText
+                android:id="@+id/edit_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="6dp"/>
+
+            <EditText
+                android:id="@+id/edit_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="6dp"/>
+
+            <EditText
+                android:id="@+id/edit_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bio"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="6dp"/>
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="6dp"/>
+
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Buttons (Save & Discard) -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/formScrollView"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/editProfileSaveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save Changes"
+            android:textSize="14sp"
+            android:background="#d84040"
+            android:textColor="#f8ede9"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Discard Button -->
+        <Button
+            android:id="@+id/editProfileDiscardButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Discard"
+            android:textSize="14sp"
+            android:background="#d84040"
+            android:textColor="#f8ede9"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#d84040"
+        android:padding="8dp">
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
